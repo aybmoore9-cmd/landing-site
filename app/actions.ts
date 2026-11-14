@@ -64,8 +64,11 @@ export async function joinWaitlist(_prev: SignupState, formData: FormData): Prom
     phone: field(formData, "phone", 30),
     address: field(formData, "address", 200),
     source: null,
-    notes: field(formData, "notes", 500) || null,
+    notes: null,
   };
+  const estimate = field(formData, "estimate", 160);
+  const notes = field(formData, "notes", 500);
+  req.notes = [estimate && `Website estimate: ${estimate}`, notes].filter(Boolean).join(" | ").slice(0, 500) || null;
   const source = field(formData, "source", 40);
   req.source = (SOURCES as readonly string[]).includes(source) ? source : null;
 

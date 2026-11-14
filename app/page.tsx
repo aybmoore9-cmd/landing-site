@@ -2,6 +2,8 @@ import Image from "next/image";
 import heroImage from "@/public/hero-example.jpg";
 import Link from "next/link";
 import SignupForm from "@/components/SignupForm";
+import Estimator from "@/components/Estimator";
+import { PACKAGES } from "@/lib/pricing";
 import { TOWNS } from "@/lib/towns";
 
 const PHONE_DISPLAY = "317-750-7610";
@@ -81,6 +83,7 @@ export default function Home() {
           </a>
           <nav className="nav">
             <a href="#included">What&apos;s included</a>
+            <a href="#packages">Packages</a>
             <a href="#how">How it works</a>
             <a href="#faq">FAQ</a>
           </nav>
@@ -169,6 +172,43 @@ export default function Home() {
                 <a href={`tel:${PHONE_TEL}`} className="price-card-call">or call {PHONE_DISPLAY}</a>
               </aside>
             </div>
+          </div>
+        </section>
+
+        <section id="packages" className="section section-alt">
+          <div className="wrap">
+            <div className="section-head">
+              <p className="kicker">Packages</p>
+              <h2>Choose your look</h2>
+              <p className="section-lead">Every package includes the lights, installation, free bulb fixes, takedown and storage.</p>
+            </div>
+            <div className="packages">
+              {PACKAGES.map((p) => (
+                <div key={p.name} className={`package${"featured" in p && p.featured ? " package-featured" : ""}`}>
+                  {"featured" in p && p.featured && <span className="package-badge">Most popular</span>}
+                  <h3>{p.name}</h3>
+                  <p className="package-price">{p.price}</p>
+                  <p className="package-blurb">{p.blurb}</p>
+                  <ul>
+                    {p.items.map((i) => (
+                      <li key={i}>{i}</li>
+                    ))}
+                  </ul>
+                  <a href="#estimate" className={`btn ${"featured" in p && p.featured ? "btn-primary" : "btn-ghost"} btn-block`}>Estimate my price</a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section id="estimate" className="section">
+          <div className="wrap">
+            <div className="section-head">
+              <p className="kicker">Instant estimate</p>
+              <h2>See your price in seconds</h2>
+              <p className="section-lead">Answer three quick questions for an estimated range. We confirm the exact price after a free measurement.</p>
+            </div>
+            <Estimator />
           </div>
         </section>
 

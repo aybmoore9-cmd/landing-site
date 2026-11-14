@@ -261,3 +261,45 @@ a { color: var(--gold); text-underline-offset: 3px; }
   .town-hero-inner, .town-body { grid-template-columns: 1fr; gap: 36px; }
 }
 @media (max-width: 640px) { .town-included { grid-template-columns: 1fr; } }
+
+/* Packages */
+.packages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
+.package { position: relative; background: var(--bg); border: 1px solid var(--line-soft); padding: 40px 32px 32px; display: flex; flex-direction: column; }
+.package-featured { border-color: var(--gold); }
+.package-badge { position: absolute; top: -12px; left: 32px; background: var(--gold); color: var(--gold-ink); font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; padding: 5px 12px; }
+.package-price { font-family: var(--font-display), Georgia, serif; font-size: 2.6rem; font-weight: 600; color: var(--gold-light); line-height: 1; margin: 6px 0 12px; }
+.package-blurb { color: var(--muted); margin-bottom: 20px; }
+.package ul { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 10px; flex: 1; }
+.package li { display: flex; gap: 12px; align-items: baseline; }
+.package li::before { content: ""; width: 6px; height: 6px; background: var(--gold); transform: rotate(45deg); flex: none; position: relative; top: -2px; }
+
+/* Estimator */
+.estimator { display: grid; grid-template-columns: 1.4fr 1fr; gap: 0; border: 1px solid var(--line); }
+.est-controls { padding: 36px; display: grid; gap: 28px; }
+.est-controls fieldset { border: 0; padding: 0; margin: 0; }
+.est-controls legend { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; padding: 0; }
+.est-options { display: flex; flex-wrap: wrap; gap: 10px; }
+.est-options label { cursor: pointer; border: 1px solid rgba(243, 238, 228, 0.18); padding: 11px 18px; font-size: .95rem; transition: border-color .15s, background .15s; }
+.est-options label.on { border-color: var(--gold); background: rgba(201, 169, 110, 0.12); color: var(--gold-light); }
+.est-options label:focus-within { outline: 2px solid var(--gold); outline-offset: 2px; }
+.est-options input { position: absolute; opacity: 0; pointer-events: none; }
+.est-stepper { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line-soft); }
+.est-stepper > div { display: flex; align-items: center; gap: 14px; }
+.est-stepper button { width: 36px; height: 36px; border: 1px solid rgba(243, 238, 228, 0.25); background: transparent; color: var(--text); font-size: 1.1rem; cursor: pointer; }
+.est-stepper button:hover { border-color: var(--gold); }
+.est-stepper output { min-width: 20px; text-align: center; font-weight: 600; }
+.est-check { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line-soft); cursor: pointer; }
+.est-check input { width: 18px; height: 18px; accent-color: var(--gold); }
+.est-result { background: var(--surface); padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; text-align: center; border-left: 1px solid var(--line); }
+.est-label { font-size: .74rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.est-price { font-family: var(--font-display), Georgia, serif; font-size: 3rem; font-weight: 600; color: var(--gold-light); line-height: 1.1; margin: 14px 0; }
+.est-price span { font-size: 1.1rem; font-style: italic; color: var(--muted); font-weight: 400; }
+.est-note { color: var(--muted); font-size: .9rem; margin-bottom: 26px; }
+.form-estimate { border: 1px solid var(--line); background: rgba(201, 169, 110, 0.08); padding: 12px 14px; font-size: .92rem; color: var(--muted); }
+.form-estimate strong { color: var(--gold-light); font-weight: 600; }
+@media (max-width: 960px) {
+  .packages { grid-template-columns: 1fr; }
+  .estimator { grid-template-columns: 1fr; }
+  .est-result { border-left: 0; border-top: 1px solid var(--line); }
+}
+@media (max-width: 640px) { .est-controls, .est-result { padding: 24px 20px; } .est-price { font-size: 2.4rem; } }

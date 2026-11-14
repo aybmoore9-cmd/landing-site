@@ -1,13 +1,21 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { joinWaitlist, type SignupState } from "@/app/actions";
 import { SOURCES } from "@/lib/sources";
+import { ESTIMATE_EVENT } from "@/components/Estimator";
 
 export default function SignupForm() {
   const [state, formAction, pending] = useActionState<SignupState, FormData>(joinWaitlist, null);
   const router = useRouter();
+  const [estimate, setEstimate] = useState("");
+
+  useEffect(() => {
+    const onEstimate = (e: Event) => setEstimate((e as CustomEvent<string>).detail);
+    window.addEventListener(ESTIMATE_EVENT, onEstimate);
+    return () => window.removeEventListener(ESTIMATE_EVENT, onEstimate);
+  }, []);
 
   useEffect(() => {
     if (state?.ok) router.push(state.repeat ? "/thank-you?returning=1" : "/thank-you");
@@ -24,6 +32,12 @@ export default function SignupForm() {
 
   return (
     <form action={formAction} className="form">
+      {estimate && (
+        <p className="form-estimate field-wide">
+          Your estimate: <strong>{estimate}</strong>
+        </p>
+      )}
+      <input type="hidden" name="estimate" value={estimate} />
       <div className="field">
         <label htmlFor="name">Name</label>
         <input id="name" name="name" type="text" required maxLength={100} autoComplete="name" />
