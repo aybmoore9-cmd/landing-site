@@ -1,19 +1,29 @@
 import SignupForm from "@/components/SignupForm";
 
 const features = [
-  { title: "Fast", body: "Built to get out of your way so you can focus on what matters." },
-  { title: "Simple", body: "No clutter, no learning curve. It just works." },
-  { title: "Yours", body: "Your data stays private and under your control." },
+  {
+    title: "Full-service installation",
+    body: "We supply the lights and handle the whole install. No ladders, no tangled cords, no trips to the store.",
+  },
+  {
+    title: "Custom design for your home",
+    body: "Every job is planned around your roofline, trees and landscaping.",
+  },
+  {
+    title: "Local and easy to reach",
+    body: "Run by three Franklin locals. Sign up and we'll contact you with a free quote.",
+  },
 ];
 
 export default function Home() {
   return (
     <main>
       <section className="hero">
-        <span className="badge">Coming soon</span>
-        <h1>Something great is on the way.</h1>
+        <span className="badge">CMP Holiday Lighting · Franklin, Indiana</span>
+        <h1>Your home, lit for the holidays.</h1>
         <p className="lead">
-          Replace this line with a one-sentence pitch for your product. Sign up to be the first to know when we launch.
+          Professional Christmas light installation for homes in the Franklin, Indiana area. We bring the lights, you
+          enjoy the glow.
         </p>
         <SignupForm />
       </section>
@@ -27,7 +37,10 @@ export default function Home() {
         ))}
       </section>
 
-      <footer>© {new Date().getFullYear()} Your Company</footer>
+      <footer>
+        CMP Holiday Lighting · <a href="tel:+13177507610">317-750-7610</a> ·{" "}
+        <a href="mailto:cmpholidaylighting@gmail.com">cmpholidaylighting@gmail.com</a>
+      </footer>
     </main>
   );
 }

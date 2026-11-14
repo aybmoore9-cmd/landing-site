@@ -14,7 +14,7 @@ export default function SignupForm() {
     <form action={formAction} className="form">
       <input name="name" type="text" placeholder="Your name (optional)" autoComplete="name" />
       <input name="email" type="email" placeholder="you@example.com" required autoComplete="email" />
-      <button type="submit" disabled={pending}>{pending ? "Joining…" : "Join the waitlist"}</button>
+      <button type="submit" disabled={pending}>{pending ? "Sending…" : "Get my free quote"}</button>
       {state && !state.ok && <p className="error" role="alert">{state.message}</p>}
     </form>
   );

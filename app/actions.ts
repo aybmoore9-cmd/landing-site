@@ -18,11 +18,11 @@ export async function joinWaitlist(_prev: SignupState, formData: FormData): Prom
 
   if (error) {
     if (error.code === "23505") {
-      return { ok: true, message: "You're already on the list — thanks!" };
+      return { ok: true, message: "We already have your info. We'll be in touch soon!" };
     }
     console.error("waitlist insert failed", error);
     return { ok: false, message: "Something went wrong. Please try again." };
   }
 
-  return { ok: true, message: "You're on the list! We'll be in touch." };
+  return { ok: true, message: "Thanks! We'll contact you soon with your free quote." };
 }
