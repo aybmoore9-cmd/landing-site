@@ -1,6 +1,8 @@
 import Image from "next/image";
 import heroImage from "@/public/hero-example.jpg";
+import Link from "next/link";
 import SignupForm from "@/components/SignupForm";
+import { TOWNS } from "@/lib/towns";
 
 const PHONE_DISPLAY = "317-750-7610";
 const PHONE_TEL = "+13177507610";
@@ -73,7 +75,7 @@ export default function Home() {
 
       <header className="header">
         <div className="wrap header-inner">
-          <a href="#top" className="logo" aria-label="CMP Holiday Lighting home">
+          <a href="#top" className="logo">
             <span className="logo-name">CMP</span>
             <span className="logo-sub">Holiday Lighting</span>
           </a>
@@ -272,6 +274,11 @@ export default function Home() {
           <div>
             <p className="logo-name">CMP Holiday Lighting</p>
             <p className="footer-tag">Professional Christmas light installation in Franklin, Indiana</p>
+            <p className="footer-links">
+              {TOWNS.map((t) => (
+                <Link key={t.slug} href={`/christmas-lights/${t.slug}`}>Christmas lights in {t.name}</Link>
+              ))}
+            </p>
           </div>
           <div className="footer-contact">
             <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>

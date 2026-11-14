@@ -15,7 +15,7 @@ export default async function ThankYou({ searchParams }: { searchParams: Promise
   return (
     <main className="thanks">
       <div className="wrap thanks-inner">
-        <Link href="/" className="logo thanks-logo" aria-label="CMP Holiday Lighting home">
+        <Link href="/" className="logo thanks-logo">
           <span className="logo-name">CMP</span>
           <span className="logo-sub">Holiday Lighting</span>
         </Link>
