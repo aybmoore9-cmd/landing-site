@@ -1,10 +1,18 @@
 "use server";
 
 import { getSupabase } from "@/lib/supabase";
+import { SOURCES } from "@/lib/sources";
 
 export type SignupState = { ok: boolean; message: string } | null;
 
-type Request = { name: string; email: string; phone: string; address: string };
+type Request = {
+  name: string;
+  email: string;
+  phone: string;
+  address: string;
+  source: string | null;
+  notes: string | null;
+};
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const NOTIFY_TO = "cmpholidaylighting@gmail.com";
@@ -27,6 +35,8 @@ async function notify(req: Request, repeat: boolean) {
     `Phone:   ${req.phone}`,
     `Email:   ${req.email}`,
     `Address: ${req.address}`,
+    `Heard via: ${req.source ?? "-"}`,
+    `Notes:   ${req.notes ?? "-"}`,
   ].join("\n");
 
   try {
@@ -53,7 +63,11 @@ export async function joinWaitlist(_prev: SignupState, formData: FormData): Prom
     email: field(formData, "email", 254).toLowerCase(),
     phone: field(formData, "phone", 30),
     address: field(formData, "address", 200),
+    source: null,
+    notes: field(formData, "notes", 500) || null,
   };
+  const source = field(formData, "source", 40);
+  req.source = (SOURCES as readonly string[]).includes(source) ? source : null;
 
   if (!req.name) {
     return { ok: false, message: "Please enter your name." };
