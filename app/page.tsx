@@ -1,4 +1,5 @@
-import HouseIllustration from "@/components/HouseIllustration";
+import Image from "next/image";
+import heroImage from "@/public/hero-example.jpg";
 import SignupForm from "@/components/SignupForm";
 
 const PHONE_DISPLAY = "317-750-7610";
@@ -90,6 +91,18 @@ export default function Home() {
 
       <main id="top">
         <section className="hero">
+          <div className="hero-media">
+            <Image
+              src={heroImage}
+              alt="Single-story home at dusk outlined in warm-white C9 Christmas lights with lit bushes and a wreath"
+              fill
+              priority
+              placeholder="blur"
+              sizes="100vw"
+              className="hero-img"
+            />
+            <span className="hero-caption">Example design</span>
+          </div>
           <div className="wrap hero-inner">
             <div className="hero-copy">
               <p className="eyebrow">Franklin, Indiana</p>
@@ -109,9 +122,6 @@ export default function Home() {
                 <a href={`sms:${PHONE_TEL}`} className="btn btn-ghost">Text us</a>
               </div>
               <p className="hero-note">We respond within 24 hours.</p>
-            </div>
-            <div className="hero-art">
-              <HouseIllustration />
             </div>
           </div>
         </section>
