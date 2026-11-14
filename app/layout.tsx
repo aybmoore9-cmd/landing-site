@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter } from "next/font/google";
 import "./globals.css";
 
-const display = Fraunces({ subsets: ["latin"], weight: ["600", "700"], variable: "--font-display" });
+const display = Cormorant_Garamond({ subsets: ["latin"], weight: ["500", "600"], style: ["normal", "italic"], variable: "--font-display" });
 const body = Inter({ subsets: ["latin"], variable: "--font-body" });
 
 const title = "CMP Holiday Lighting | Christmas Light Installation in Franklin, IN";
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   twitter: { card: "summary", title, description },
 };
 
-export const viewport: Viewport = { themeColor: "#0b1226" };
+export const viewport: Viewport = { themeColor: "#0e1420" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

@@ -66,18 +66,15 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <div className="banner">
-        <span>🎄 Now booking 2026 installs</span>
-        <span className="banner-sep" aria-hidden="true">·</span>
-        <span>Serving Franklin, Greenwood, Whiteland &amp; Bargersville</span>
+        <span><strong>Now booking</strong> 2026 installations</span>
+        <span>Franklin · Greenwood · Whiteland · Bargersville</span>
       </div>
 
       <header className="header">
         <div className="wrap header-inner">
           <a href="#top" className="logo" aria-label="CMP Holiday Lighting home">
-            <span className="logo-mark" aria-hidden="true">
-              <i /><i /><i />
-            </span>
-            CMP Holiday Lighting
+            <span className="logo-name">CMP</span>
+            <span className="logo-sub">Holiday Lighting</span>
           </a>
           <nav className="nav">
             <a href="#included">What&apos;s included</a>
@@ -95,15 +92,17 @@ export default function Home() {
         <section className="hero">
           <div className="wrap hero-inner">
             <div className="hero-copy">
-              <p className="eyebrow">Christmas light installation · Franklin, Indiana</p>
-              <h1>Your home, lit for the holidays.</h1>
+              <p className="eyebrow">Franklin, Indiana</p>
+              <h1>
+                Your home, <em>lit</em> for the holidays.
+              </h1>
               <p className="lead">
                 Professional Christmas light installation for homes in the Franklin, Indiana area. We bring the lights,
                 you enjoy the glow.
               </p>
               <div className="price-tag">
                 <strong>Full service from $400</strong>
-                <span>Lights, install, bulb fixes, takedown &amp; storage included</span>
+                <span>Lights, installation, maintenance, takedown and storage</span>
               </div>
               <div className="hero-ctas">
                 <a href="#quote" className="btn btn-primary">Get my free quote</a>
@@ -118,21 +117,24 @@ export default function Home() {
         </section>
 
         <section className="trust" aria-label="Why homeowners choose us">
-          <div className="wrap trust-inner">
-            <span>📍 Three Franklin locals</span>
-            <span>💡 We supply the lights</span>
-            <span>🔧 Free fixes all season</span>
-            <span>📦 Takedown &amp; storage included</span>
-          </div>
+          <ul className="wrap trust-inner">
+            <li>Locally owned in Franklin</li>
+            <li>Commercial-grade LED</li>
+            <li>Maintained all season</li>
+            <li>Takedown &amp; storage included</li>
+          </ul>
         </section>
 
         <section id="included" className="section">
           <div className="wrap">
-            <p className="kicker">One simple price</p>
-            <h2>Everything included. Nothing to buy.</h2>
-            <p className="section-lead">
-              Most companies make you choose add-ons. Our full-service price covers the whole season, start to finish.
-            </p>
+            <div className="section-head">
+              <p className="kicker">One simple price</p>
+              <h2>Everything included. Nothing to buy.</h2>
+              <p className="section-lead">
+                Our full-service price covers the whole season, from the first bulb to the last box, with no add-ons
+                required.
+              </p>
+            </div>
             <div className="included-grid">
               <ul className="included-list">
                 {included.map(([title, body]) => (
@@ -160,12 +162,14 @@ export default function Home() {
 
         <section id="how" className="section section-alt">
           <div className="wrap">
-            <p className="kicker">How it works</p>
-            <h2>Lit up in three easy steps</h2>
+            <div className="section-head">
+              <p className="kicker">How it works</p>
+              <h2>Three simple steps</h2>
+            </div>
             <ol className="steps">
               {steps.map(([title, body], i) => (
                 <li key={title}>
-                  <span className="step-num">{i + 1}</span>
+                  <span className="step-num">{String(i + 1).padStart(2, "0")}</span>
                   <h3>{title}</h3>
                   <p>{body}</p>
                 </li>
@@ -176,8 +180,10 @@ export default function Home() {
 
         <section className="section">
           <div className="wrap">
-            <p className="kicker">Why CMP</p>
-            <h2>Local, hassle-free holiday lighting</h2>
+            <div className="section-head">
+              <p className="kicker">Why CMP</p>
+              <h2>Local, hassle-free holiday lighting</h2>
+            </div>
             <div className="cards">
               {reasons.map(([title, body]) => (
                 <div key={title} className="card">
@@ -215,8 +221,10 @@ export default function Home() {
 
         <section id="faq" className="section">
           <div className="wrap faq-wrap">
-            <p className="kicker">FAQ</p>
-            <h2>Common questions</h2>
+            <div className="section-head">
+              <p className="kicker">Questions</p>
+              <h2>Frequently asked</h2>
+            </div>
             <div className="faq">
               {faqs.map(([q, a]) => (
                 <details key={q}>
@@ -230,6 +238,7 @@ export default function Home() {
 
         <section className="section section-alt areas">
           <div className="wrap">
+            <p className="kicker">Service area</p>
             <h2>Proudly serving Johnson County</h2>
             <ul className="area-list">
               {AREAS.map((a) => (
@@ -251,8 +260,8 @@ export default function Home() {
       <footer className="footer">
         <div className="wrap footer-inner">
           <div>
-            <p className="footer-name">CMP Holiday Lighting</p>
-            <p>Professional Christmas light installation · Franklin, Indiana</p>
+            <p className="logo-name">CMP Holiday Lighting</p>
+            <p className="footer-tag">Professional Christmas light installation in Franklin, Indiana</p>
           </div>
           <div className="footer-contact">
             <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
