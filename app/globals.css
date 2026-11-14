@@ -231,3 +231,17 @@ a { color: var(--gold); text-underline-offset: 3px; }
   .mobile-bar a + a { border-left: 1px solid var(--line-soft); }
   .mobile-bar .mobile-bar-primary { background: var(--gold); color: var(--gold-ink); }
 }
+
+/* Thank-you page */
+.thanks { min-height: 100vh; display: flex; align-items: center; padding: 72px 0; background: radial-gradient(800px 420px at 70% 20%, rgba(201, 169, 110, 0.10), transparent 65%), var(--bg); }
+.thanks-inner { max-width: 760px; }
+.thanks-logo { margin-bottom: 56px; display: flex; width: max-content; }
+.thanks h1 { font-size: clamp(2.4rem, 5.5vw, 3.8rem); margin-bottom: 18px; }
+.thanks .lead { margin-bottom: 40px; }
+.thanks-steps { list-style: none; padding: 0; margin: 0 0 44px; border-top: 1px solid var(--line); }
+.thanks-steps li { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--line-soft); }
+.thanks-steps .step-num { font-size: 2.2rem; margin: 0; flex: none; width: 56px; }
+.thanks-steps strong { display: block; font-weight: 600; margin-bottom: 4px; }
+.thanks-steps span:not(.step-num) { color: var(--muted); }
+.thanks-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 28px; }
+.thanks-back { color: var(--muted); font-size: .9rem; }

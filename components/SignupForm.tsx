@@ -1,11 +1,17 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { joinWaitlist, type SignupState } from "@/app/actions";
 import { SOURCES } from "@/lib/sources";
 
 export default function SignupForm() {
   const [state, formAction, pending] = useActionState<SignupState, FormData>(joinWaitlist, null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (state?.ok) router.push(state.repeat ? "/thank-you?returning=1" : "/thank-you");
+  }, [state, router]);
 
   if (state?.ok) {
     return (

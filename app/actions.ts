@@ -3,7 +3,7 @@
 import { getSupabase } from "@/lib/supabase";
 import { SOURCES } from "@/lib/sources";
 
-export type SignupState = { ok: boolean; message: string } | null;
+export type SignupState = { ok: boolean; message: string; repeat?: boolean } | null;
 
 type Request = {
   name: string;
@@ -89,7 +89,7 @@ export async function joinWaitlist(_prev: SignupState, formData: FormData): Prom
     if (error.code === "23505") {
       // Same email already on file: still pass the new details along so nothing is lost.
       await notify(req, true);
-      return { ok: true, message: "We already have your info. We'll be in touch soon!" };
+      return { ok: true, repeat: true, message: "We already have your info. We'll be in touch soon!" };
     }
     console.error("waitlist insert failed", error);
     return { ok: false, message: "Something went wrong. Please try again." };
