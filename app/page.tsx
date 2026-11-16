@@ -23,6 +23,7 @@ const season = [
 const faqs = [
   ["How much does it cost?", "Expect roughly $400 to $1,000 for most one-story homes. It's priced by how many feet of roofline we light, plus any bushes or trees. Try the estimator above, or we'll measure for free and give you an exact number."],
   ["Do I need to buy lights?", "No. We bring commercial-grade LED lights, clips, cords and a timer. It's all included, and we store it for you after the season."],
+  ["Is this permanent lighting?", "No. We do traditional Christmas lights. They clip on for the season and come down in January, so there are no tracks, no drilling and nothing left on your house."],
   ["What if something stops working?", "Text us. We fix it free for the rest of the season."],
   ["When do you take them down?", "In January. We'll text you the day before. You don't need to be home."],
   ["What areas do you cover?", `We're based in Franklin and also do ${AREAS.slice(1).join(", ")}. If you're close to those, ask anyway.`],
@@ -99,7 +100,7 @@ export default function Home() {
                 <a href="#quote" className="btn btn-primary">Get a free quote</a>
                 <a href={`sms:${PHONE_TEL}`} className="btn btn-ghost">Text us</a>
               </div>
-              <p className="hero-note">Franklin, Greenwood, Whiteland and Bargersville. We reply within a day.</p>
+              <p className="hero-note">Traditional Christmas lights, up for the season and down in January. Franklin, Greenwood, Whiteland and Bargersville.</p>
             </div>
           </div>
         </section>
