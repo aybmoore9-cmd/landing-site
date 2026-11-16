@@ -74,9 +74,9 @@ export default function Estimator() {
         <p className="est-price">
           {fmt(lo)} <span>to</span> {fmt(hi)}
         </p>
-        <p className="est-note">Includes lights, installation, free bulb fixes, takedown and storage. Your exact price is confirmed after a free measurement.</p>
+        <p className="est-note">Includes lights, install, free fixes, takedown and storage. We confirm the exact price when we measure.</p>
         <button type="button" className="btn btn-primary btn-block" onClick={applyEstimate}>
-          Get my exact quote
+          Send me an exact quote
         </button>
       </div>
     </div>
