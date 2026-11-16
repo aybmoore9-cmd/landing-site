@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Logo from "@/components/Logo";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import heroImage from "@/public/hero-example.jpg";
@@ -19,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ town: str
   const town = getTown((await params).town);
   if (!town) return {};
   const title = `Christmas Light Installation in ${town.short} | CMP Holiday Lighting`;
-  const description = `Full-service Christmas light installation in ${town.name}, Indiana from $400. Lights, installation, bulb fixes, takedown and storage included.`;
+  const description = `Christmas light installation in ${town.name}, Indiana from $400. Lights, install, free fixes, takedown and storage included.`;
   return {
     title,
     description,
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: { params: Promise<{ town: str
 const included = [
   "Commercial-grade LED lights, supplied by us",
   "Custom fit to your roofline",
-  "Professional installation",
+  "Installed by us, not subcontractors",
   "Free bulb fixes all season",
   "Takedown in January",
   "Storage until next year",
@@ -57,8 +58,7 @@ export default async function TownPage({ params }: { params: Promise<{ town: str
       <header className="header">
         <div className="wrap header-inner">
           <Link href="/" className="logo">
-            <span className="logo-name">CMP</span>
-            <span className="logo-sub">Holiday Lighting</span>
+            <Logo />
           </Link>
           <div className="header-cta">
             <a href={`tel:${PHONE_TEL}`} className="header-phone">{PHONE_DISPLAY}</a>
@@ -75,11 +75,11 @@ export default async function TownPage({ params }: { params: Promise<{ town: str
               <h1>Christmas light installation in {town.name}</h1>
               <p className="lead">{town.intro}</p>
               <div className="price-tag">
-                <strong>Full service from $400</strong>
-                <span>Lights, installation, maintenance, takedown and storage</span>
+                <strong>From $400</strong>
+                <span>with lights, install, fixes, takedown and storage included</span>
               </div>
               <div className="hero-ctas">
-                <Link href="/#quote" className="btn btn-primary">Get my free quote</Link>
+                <Link href="/#quote" className="btn btn-primary">Get a free quote</Link>
                 <a href={`sms:${PHONE_TEL}`} className="btn btn-ghost">Text us</a>
               </div>
             </div>
@@ -93,8 +93,7 @@ export default async function TownPage({ params }: { params: Promise<{ town: str
         <section className="section section-alt">
           <div className="wrap town-body">
             <div>
-              <p className="kicker">Local service</p>
-              <h2>Hassle-free holiday lighting for {town.name}</h2>
+              <h2>Holiday lights in {town.name}, handled</h2>
               <p className="section-lead">{town.local}</p>
             </div>
             <ul className="included-list town-included">
@@ -114,7 +113,6 @@ export default async function TownPage({ params }: { params: Promise<{ town: str
         <section className="section">
           <div className="wrap faq-wrap">
             <div className="section-head">
-              <p className="kicker">Questions</p>
               <h2>{town.name} FAQ</h2>
             </div>
             <div className="faq">
@@ -132,7 +130,7 @@ export default async function TownPage({ params }: { params: Promise<{ town: str
           <div className="wrap">
             <h2>Skip the ladder this year.</h2>
             <p>Full-service Christmas lights in {town.name} from $400.</p>
-            <Link href="/#quote" className="btn btn-primary">Get my free quote</Link>
+            <Link href="/#quote" className="btn btn-primary">Get a free quote</Link>
           </div>
         </section>
       </main>
@@ -140,8 +138,8 @@ export default async function TownPage({ params }: { params: Promise<{ town: str
       <footer className="footer">
         <div className="wrap footer-inner">
           <div>
-            <p className="logo-name">CMP Holiday Lighting</p>
-            <p className="footer-tag">Professional Christmas light installation in Franklin, Indiana</p>
+            <p className="footer-name">CMP Holiday Lighting</p>
+            <p className="footer-tag">Christmas light installation, based in Franklin, Indiana</p>
             <p className="footer-links">
               <Link href="/">Franklin</Link>
               {TOWNS.map((t) => (

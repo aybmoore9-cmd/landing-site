@@ -27,7 +27,7 @@ export const TOWNS: Town[] = [
     name: "Whiteland & New Whiteland",
     short: "Whiteland, IN",
     intro:
-      "Whiteland and New Whiteland sit right between Franklin and Greenwood, minutes from where we're based. We install full-service Christmas lights for homes in both towns: lights supplied, professionally installed, maintained all season and taken down in January.",
+      "Whiteland and New Whiteland sit right between Franklin and Greenwood, minutes from where we're based. We install full-service Christmas lights for homes in both towns: we bring the lights, hang them, fix anything that goes out and take it all down in January.",
     local:
       "Because we're local, we can usually measure your home within a day or two of your request, and we're close by if a section of lights ever needs a fix during the season.",
     faqs: [

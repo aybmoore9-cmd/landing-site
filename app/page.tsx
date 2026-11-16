@@ -2,6 +2,10 @@ import Image from "next/image";
 import heroImage from "@/public/hero-example.jpg";
 import Link from "next/link";
 import SignupForm from "@/components/SignupForm";
+import Estimator from "@/components/Estimator";
+import Logo from "@/components/Logo";
+import LightString from "@/components/LightString";
+import { PACKAGES } from "@/lib/pricing";
 import { TOWNS } from "@/lib/towns";
 
 const PHONE_DISPLAY = "317-750-7610";
@@ -9,42 +13,26 @@ const PHONE_TEL = "+13177507610";
 const EMAIL = "cmpholidaylighting@gmail.com";
 const AREAS = ["Franklin", "Greenwood", "Whiteland", "New Whiteland", "Bargersville", "Center Grove", "South Indianapolis"];
 
-const included = [
-  ["Commercial-grade LED lights", "We supply everything. You never buy, untangle or store a strand."],
-  ["Custom fit to your home", "Every run is measured and cut for your roofline, trees and landscaping."],
-  ["Professional installation", "Safe, clean and secure. No ladders for you."],
-  ["Free bulb fixes all season", "If a section goes out, text us and we'll fix it at no charge."],
-  ["Takedown in January", "We come back after the holidays and take everything down."],
-  ["Storage until next year", "We keep your lights safe, labeled and ready for next season."],
-];
-
-const steps = [
-  ["Request a free quote", "Fill out the short form or give us a call. It takes about 30 seconds."],
-  ["We measure and price it", "We stop by, measure your home and give you a clear price. No obligation."],
-  ["We light it up", "We install, keep it shining all season, and take it down in January."],
-];
-
-const reasons = [
-  ["Full-service installation", "We supply the lights and handle the whole install. No ladders, no tangled cords, no trips to the store."],
-  ["Custom design for your home", "Every job is planned around your roofline, trees and landscaping."],
-  ["Local and easy to reach", "Run by three Franklin locals. Sign up and we'll contact you with a free quote."],
+const season = [
+  ["Now", "Quote", "Text us or fill out the form. We come measure. You don't have to be home."],
+  ["Late Nov to Dec", "Install", "We hang everything, plug it into a timer and make sure it all works before we leave."],
+  ["All season", "Fixes", "A bulb or strand goes out? Text us. We come back and fix it, no charge."],
+  ["January", "Takedown", "We take it all down, label it for your house and store it until next year."],
 ];
 
 const faqs = [
-  ["How much does it cost?", "Full-service installation starts at $400. Your exact price depends on the size of your home and what you'd like lit. We'll measure and give you a clear quote for free."],
-  ["Do I need to buy my own lights?", "No. We supply all the lights and supplies. That's part of the service, so there's nothing for you to buy or store."],
-  ["What's included in the price?", "The lights, custom fitting, installation, free bulb fixes all season, takedown in January, and storage until next year."],
-  ["What if some lights go out?", "Call or text us and we'll come fix it at no charge for the rest of the season."],
-  ["When do the lights come down?", "We take everything down in January and store it for you until next season."],
-  ["What areas do you serve?", `We're based in Franklin and serve ${AREAS.slice(1).join(", ")}. Not sure if you're in range? Just ask.`],
-  ["How soon can you install?", "We're booking installs now. Request your quote early for the best choice of install dates."],
+  ["How much does it cost?", "Expect roughly $400 to $1,000 for most one-story homes. It's priced by how many feet of roofline we light, plus any bushes or trees. Try the estimator above, or we'll measure for free and give you an exact number."],
+  ["Do I need to buy lights?", "No. We bring commercial-grade LED lights, clips, cords and a timer. It's all included, and we store it for you after the season."],
+  ["What if something stops working?", "Text us. We fix it free for the rest of the season."],
+  ["When do you take them down?", "In January. We'll text you the day before. You don't need to be home."],
+  ["What areas do you cover?", `We're based in Franklin and also do ${AREAS.slice(1).join(", ")}. If you're close to those, ask anyway.`],
 ];
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "HomeAndConstructionBusiness",
   name: "CMP Holiday Lighting",
-  description: "Professional Christmas light installation for homes in the Franklin, Indiana area. We bring the lights, you enjoy the glow.",
+  description: "Christmas light installation for homes in Franklin, Indiana and nearby towns. Lights, installation, fixes, takedown and storage included.",
   telephone: PHONE_TEL,
   email: EMAIL,
   url: "https://landing-site-nine-sable.vercel.app",
@@ -54,34 +42,24 @@ const jsonLd = {
   makesOffer: { "@type": "Offer", itemOffered: { "@type": "Service", name: "Christmas light installation" } },
 };
 
-function Check() {
-  return (
-    <svg viewBox="0 0 20 20" className="check" aria-hidden="true">
-      <circle cx="10" cy="10" r="10" />
-      <path d="M5.5 10.5l3 3 6-6.5" fill="none" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 export default function Home() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <div className="banner">
-        <span><strong>Now booking</strong> 2026 installations</span>
-        <span>Franklin · Greenwood · Whiteland · Bargersville</span>
+        Booking 2026 installs now. Questions? Text <a href={`sms:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
       </div>
 
       <header className="header">
         <div className="wrap header-inner">
           <a href="#top" className="logo">
-            <span className="logo-name">CMP</span>
-            <span className="logo-sub">Holiday Lighting</span>
+            <Logo />
           </a>
           <nav className="nav">
-            <a href="#included">What&apos;s included</a>
-            <a href="#how">How it works</a>
+            <a href="#prices">Prices</a>
+            <a href="#estimate">Estimate</a>
+            <a href="#season">How it works</a>
             <a href="#faq">FAQ</a>
           </nav>
           <div className="header-cta">
@@ -107,122 +85,101 @@ export default function Home() {
           </div>
           <div className="wrap hero-inner">
             <div className="hero-copy">
-              <p className="eyebrow">Franklin, Indiana</p>
               <h1>
-                Your home, <em>lit</em> for the holidays.
+                Your home, <span className="glow">lit</span> for the holidays.
               </h1>
               <p className="lead">
-                Professional Christmas light installation for homes in the Franklin, Indiana area. We bring the lights,
-                you enjoy the glow.
+                We hang your Christmas lights, fix them if anything goes out, and take them down in January. We bring
+                the lights. You stay off the ladder.
               </p>
-              <div className="price-tag">
-                <strong>Full service from $400</strong>
-                <span>Lights, installation, maintenance, takedown and storage</span>
-              </div>
+              <p className="hero-price">
+                <strong>From $400</strong> with everything included
+              </p>
               <div className="hero-ctas">
-                <a href="#quote" className="btn btn-primary">Get my free quote</a>
+                <a href="#quote" className="btn btn-primary">Get a free quote</a>
                 <a href={`sms:${PHONE_TEL}`} className="btn btn-ghost">Text us</a>
               </div>
-              <p className="hero-note">We respond within 24 hours.</p>
+              <p className="hero-note">Franklin, Greenwood, Whiteland and Bargersville. We reply within a day.</p>
             </div>
           </div>
         </section>
 
-        <section className="trust" aria-label="Why homeowners choose us">
-          <ul className="wrap trust-inner">
-            <li>Locally owned in Franklin</li>
-            <li>Commercial-grade LED</li>
-            <li>Maintained all season</li>
-            <li>Takedown &amp; storage included</li>
-          </ul>
+        <LightString />
+
+        <section className="section note-section">
+          <div className="wrap note-grid">
+            <h2>A note from us</h2>
+            <div className="note">
+              <p>
+                CMP is three friends from Franklin, and this is our first season. We answer our own phone, we do every
+                install ourselves, and if a strand goes out in December, one of us comes back to fix it.
+              </p>
+              <p>
+                We&apos;d rather do a smaller number of houses really well. If that sounds good to you, send us a
+                text.
+              </p>
+              <p className="signoff">The CMP crew</p>
+            </div>
+          </div>
         </section>
 
-        <section id="included" className="section">
-          <div className="wrap">
-            <div className="section-head">
-              <p className="kicker">One simple price</p>
-              <h2>Everything included. Nothing to buy.</h2>
+        <section id="prices" className="section section-alt">
+          <div className="wrap prices-grid">
+            <div>
+              <h2>What it costs</h2>
               <p className="section-lead">
-                Our full-service price covers the whole season, from the first bulb to the last box, with no add-ons
-                required.
+                One price covers the whole season. It includes the lights, clips, cords and timer, installation, free
+                fixes, January takedown and storage until next year.
+              </p>
+              <p className="prices-fine">
+                Bigger home or something custom? We price by the foot ($5.50 per foot of roofline) plus bushes and
+                trees. The measurement and quote are free.
               </p>
             </div>
-            <div className="included-grid">
-              <ul className="included-list">
-                {included.map(([title, body]) => (
-                  <li key={title}>
-                    <Check />
-                    <div>
-                      <strong>{title}</strong>
-                      <span>{body}</span>
+            <ul className="price-list">
+              {PACKAGES.map((p) => {
+                const featured = "featured" in p && p.featured;
+                return (
+                  <li key={p.name} className={featured ? "featured" : undefined}>
+                    <div className="price-row">
+                      <h3>{p.name}</h3>
+                      <span className="dots" aria-hidden="true" />
+                      <span className="price">{p.price}</span>
                     </div>
+                    <p>
+                      {p.items.join(". ")}.
+                      {featured && <span className="tag">Most people pick this</span>}
+                    </p>
                   </li>
-                ))}
-              </ul>
-              <aside className="price-card">
-                <p className="price-card-label">Full-service installation</p>
-                <p className="price-card-price">
-                  <span>from</span> $400
-                </p>
-                <p className="price-card-sub">Priced by the size of your home. Free measurement and quote, no obligation.</p>
-                <a href="#quote" className="btn btn-primary btn-block">Get my free quote</a>
-                <a href={`tel:${PHONE_TEL}`} className="price-card-call">or call {PHONE_DISPLAY}</a>
-              </aside>
-            </div>
+                );
+              })}
+              <li className="price-list-cta">
+                <a href="#estimate" className="btn btn-ghost">Estimate my house</a>
+              </li>
+            </ul>
           </div>
         </section>
 
-        <section id="how" className="section section-alt">
+        <section id="estimate" className="section">
           <div className="wrap">
             <div className="section-head">
-              <p className="kicker">How it works</p>
-              <h2>Three simple steps</h2>
+              <h2>Ballpark your price</h2>
+              <p className="section-lead">Pick what fits your house. We&apos;ll confirm the real number when we measure.</p>
             </div>
-            <ol className="steps">
-              {steps.map(([title, body], i) => (
-                <li key={title}>
-                  <span className="step-num">{String(i + 1).padStart(2, "0")}</span>
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="wrap">
-            <div className="section-head">
-              <p className="kicker">Why CMP</p>
-              <h2>Local, hassle-free holiday lighting</h2>
-            </div>
-            <div className="cards">
-              {reasons.map(([title, body]) => (
-                <div key={title} className="card">
-                  <h3>{title}</h3>
-                  <p>{body}</p>
-                </div>
-              ))}
-            </div>
+            <Estimator />
           </div>
         </section>
 
         <section id="quote" className="section section-quote">
           <div className="wrap quote-inner">
             <div className="quote-copy">
-              <p className="kicker">Free quote</p>
-              <h2>Let&apos;s light up your home</h2>
+              <h2>Get a free quote</h2>
               <p>
-                Tell us a little about your home and we&apos;ll get back to you within 24 hours with a free,
-                no-obligation quote.
+                Send us your info and one of us will text or call within a day to set up a time to measure. No
+                pressure, no obligation.
               </p>
-              <ul className="quote-points">
-                <li><Check /> Full service from $400</li>
-                <li><Check /> We supply all the lights</li>
-                <li><Check /> Takedown &amp; storage included</li>
-              </ul>
               <p className="quote-alt">
-                Prefer to talk? Call or text <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>
+                Rather just talk? Call or text <a href={`tel:${PHONE_TEL}`}>{PHONE_DISPLAY}</a>.
               </p>
             </div>
             <div className="quote-form">
@@ -231,12 +188,26 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="faq" className="section">
-          <div className="wrap faq-wrap">
+        <section id="season" className="section">
+          <div className="wrap">
             <div className="section-head">
-              <p className="kicker">Questions</p>
-              <h2>Frequently asked</h2>
+              <h2>How the season goes</h2>
             </div>
+            <ol className="season">
+              {season.map(([when, title, body]) => (
+                <li key={title}>
+                  <span className="season-when">{when}</span>
+                  <h3>{title}</h3>
+                  <p>{body}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        <section id="faq" className="section section-alt">
+          <div className="wrap faq-wrap">
+            <h2>Questions people ask</h2>
             <div className="faq">
               {faqs.map(([q, a]) => (
                 <details key={q}>
@@ -248,23 +219,12 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="section section-alt areas">
-          <div className="wrap">
-            <p className="kicker">Service area</p>
-            <h2>Proudly serving Johnson County</h2>
-            <ul className="area-list">
-              {AREAS.map((a) => (
-                <li key={a}>{a}</li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
         <section className="final-cta">
+          <LightString className="light-string-top" />
           <div className="wrap">
             <h2>Skip the ladder this year.</h2>
-            <p>Full-service Christmas lights from $400. We handle everything.</p>
-            <a href="#quote" className="btn btn-primary">Get my free quote</a>
+            <p>We&apos;re booking installs now in {AREAS.slice(0, 5).join(", ")} and nearby.</p>
+            <a href="#quote" className="btn btn-primary">Get a free quote</a>
           </div>
         </section>
       </main>
@@ -272,8 +232,8 @@ export default function Home() {
       <footer className="footer">
         <div className="wrap footer-inner">
           <div>
-            <p className="logo-name">CMP Holiday Lighting</p>
-            <p className="footer-tag">Professional Christmas light installation in Franklin, Indiana</p>
+            <p className="footer-name">CMP Holiday Lighting</p>
+            <p className="footer-tag">Christmas light installation, based in Franklin, Indiana</p>
             <p className="footer-links">
               {TOWNS.map((t) => (
                 <Link key={t.slug} href={`/christmas-lights/${t.slug}`}>Christmas lights in {t.name}</Link>

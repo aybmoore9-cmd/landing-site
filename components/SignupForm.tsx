@@ -1,13 +1,21 @@
 "use client";
 
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { joinWaitlist, type SignupState } from "@/app/actions";
 import { SOURCES } from "@/lib/sources";
+import { ESTIMATE_EVENT } from "@/components/Estimator";
 
 export default function SignupForm() {
   const [state, formAction, pending] = useActionState<SignupState, FormData>(joinWaitlist, null);
   const router = useRouter();
+  const [estimate, setEstimate] = useState("");
+
+  useEffect(() => {
+    const onEstimate = (e: Event) => setEstimate((e as CustomEvent<string>).detail);
+    window.addEventListener(ESTIMATE_EVENT, onEstimate);
+    return () => window.removeEventListener(ESTIMATE_EVENT, onEstimate);
+  }, []);
 
   useEffect(() => {
     if (state?.ok) router.push(state.repeat ? "/thank-you?returning=1" : "/thank-you");
@@ -17,13 +25,19 @@ export default function SignupForm() {
     return (
       <div className="success" role="status">
         <p className="success-title">{state.message}</p>
-        <p>One of us will call or text you within 24 hours to set up a free measurement.</p>
+        <p>One of us will text or call within a day to set up a time to measure.</p>
       </div>
     );
   }
 
   return (
     <form action={formAction} className="form">
+      {estimate && (
+        <p className="form-estimate field-wide">
+          Your estimate: <strong>{estimate}</strong>
+        </p>
+      )}
+      <input type="hidden" name="estimate" value={estimate} />
       <div className="field">
         <label htmlFor="name">Name</label>
         <input id="name" name="name" type="text" required maxLength={100} autoComplete="name" />
@@ -56,9 +70,9 @@ export default function SignupForm() {
         <textarea id="notes" name="notes" rows={3} maxLength={500} placeholder="Two-story house, trees you'd like lit, best time to reach you…" />
       </div>
       <button type="submit" className="btn btn-primary field-wide" disabled={pending}>
-        {pending ? "Sending…" : "Get my free quote"}
+        {pending ? "Sending…" : "Send my quote request"}
       </button>
-      <p className="form-note field-wide">Free, no obligation. We&apos;ll reach out within 24 hours.</p>
+      <p className="form-note field-wide">Free, no obligation. We&apos;ll text or call within a day.</p>
       {state && !state.ok && (
         <p className="error field-wide" role="alert">{state.message}</p>
       )}
