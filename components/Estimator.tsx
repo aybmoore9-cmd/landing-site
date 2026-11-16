@@ -23,16 +23,15 @@ export default function Estimator() {
   const [coverage, setCoverage] = useState<Coverage>("front");
   const [bushes, setBushes] = useState(0);
   const [trees, setTrees] = useState(0);
-  const [wreath, setWreath] = useState(false);
-  const [pathway, setPathway] = useState(false);
+  const [pillars, setPillars] = useState(0);
 
-  const [lo, hi] = estimate({ home, coverage, bushes, trees, wreath, pathway });
+  const [lo, hi] = estimate({ home, coverage, bushes, trees, pillars });
   const fmt = (n: number) => `$${n.toLocaleString()}`;
 
   function applyEstimate() {
     const homeLabel = HOME_TYPES.find((h) => h.id === home)?.label;
     const covLabel = COVERAGE.find((c) => c.id === coverage)?.label;
-    const parts = [homeLabel, covLabel, bushes && `${bushes} bushes`, trees && `${trees} trees`, wreath && "wreath", pathway && "pathway lights"].filter(Boolean);
+    const parts = [homeLabel, covLabel, bushes && `${bushes} bushes`, trees && `${trees} trees`, pillars && `${pillars} porch pillars`].filter(Boolean);
     const summary = `${fmt(lo)}–${fmt(hi)} (${parts.join(", ")})`;
     window.dispatchEvent(new CustomEvent(ESTIMATE_EVENT, { detail: summary }));
     document.getElementById("quote")?.scrollIntoView({ behavior: "smooth" });
@@ -66,13 +65,8 @@ export default function Estimator() {
         <fieldset>
           <legend>Extras</legend>
           <Stepper label="Bushes" value={bushes} onChange={setBushes} max={20} />
-          <Stepper label="Small trees" value={trees} onChange={setTrees} max={6} />
-          <label className="est-check">
-            <input type="checkbox" checked={wreath} onChange={(e) => setWreath(e.target.checked)} /> Lit wreath
-          </label>
-          <label className="est-check">
-            <input type="checkbox" checked={pathway} onChange={(e) => setPathway(e.target.checked)} /> Walkway lights
-          </label>
+          <Stepper label="Trees up to 10 ft" value={trees} onChange={setTrees} max={6} />
+          <Stepper label="Porch pillars" value={pillars} onChange={setPillars} max={8} />
         </fieldset>
       </div>
       <div className="est-result" aria-live="polite">
